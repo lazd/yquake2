@@ -31,9 +31,7 @@ Draw_InitLocal
 */
 void Draw_InitLocal (void)
 {
-	// load console characters (don't bilerp characters)
-	qvksampler_t samplerType = S_NEAREST;
-	draw_chars = Vk_FindImage("pics/conchars.pcx", it_pic, &samplerType);
+	draw_chars = Vk_FindImage("pics/conchars.pcx", it_pic);
 	if (!draw_chars)
 	{
 		ri.Sys_Error(ERR_FATAL, "%s: Couldn't load pics/conchars.pcx", __func__);
@@ -91,10 +89,10 @@ image_t	*RE_Draw_FindPic (char *name)
 		char	fullname[MAX_QPATH];
 
 		Com_sprintf(fullname, sizeof(fullname), "pics/%s.pcx", name);
-		vk = Vk_FindImage(fullname, it_pic, NULL);
+		vk = Vk_FindImage(fullname, it_pic);
 	}
 	else
-		vk = Vk_FindImage(name + 1, it_pic, NULL);
+		vk = Vk_FindImage(name + 1, it_pic);
 
 	return vk;
 }
@@ -137,8 +135,7 @@ void RE_Draw_StretchPic (int x, int y, int w, int h, char *name)
 
 	float imgTransform[] = { (float)x / vid.width, (float)y / vid.height,
 							 (float)w / vid.width, (float)h / vid.height,
-							  vk->sl,				vk->tl,
-							  vk->sh - vk->sl,		vk->th - vk->tl };
+							  0, 0, 1, 1 };
 	QVk_DrawTexRect(imgTransform, sizeof(imgTransform), &vk->vk_texture);
 }
 

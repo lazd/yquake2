@@ -334,6 +334,18 @@ it's `+set busywait 0` (setting the `busywait` cvar) and `-portable`
   * `1` - only errors and warnings
   * `2` - best-practices validation
 
+* **vk_retexturing**: Apply retexturing:
+  * `0` - dont use retexturing logic and dont load the high resolution
+          textures,
+  * `1` - load the high resolution textures if pack is installed.
+  * `2` - try to load the pack or scale up all 8bit textures if pack is
+          not installed.
+
+* **vk_nolerp_list**: list separate by spaces of textures omitted from
+  bilinear filtering. Used by default to exclude the console and HUD
+  fonts.  Make sure to include the default values when extending the
+  list.
+
 * **vk_strings**: Print some basic Vulkan/GPU information.
 
 * **vk_mem**: Print dynamic vertex/index/uniform/triangle fan buffer
@@ -392,8 +404,6 @@ it's `+set busywait 0` (setting the `busywait` cvar) and `-portable`
 * **vk_shadows**: Draw experimental entity shadows. (default: `0`)
 
 * **vk_picmip**: Shrink factor for the textures. (default: `0`)
-
-* **vk_round_down**: Toggle the rounding of texture sizes. (default: `1`)
 
 * **vk_dynamic**: Use dynamic lighting. (default: `1`)
 

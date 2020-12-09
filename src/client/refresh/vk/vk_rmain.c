@@ -97,7 +97,6 @@ cvar_t	*vk_validation;
 cvar_t	*vk_bitdepth;
 cvar_t	*vk_picmip;
 cvar_t	*vk_skymip;
-cvar_t	*vk_round_down;
 cvar_t	*vk_flashblend;
 cvar_t	*vk_finish;
 cvar_t	*r_clear;
@@ -124,6 +123,7 @@ cvar_t	*vk_mip_nearfilter;
 cvar_t	*vk_sampleshading;
 cvar_t	*vk_device_idx;
 cvar_t	*vk_retexturing;
+cvar_t	*vk_nolerp_list;
 
 cvar_t	*vid_fullscreen;
 cvar_t	*vid_gamma;
@@ -1152,7 +1152,6 @@ R_Register( void )
 	vk_bitdepth = ri.Cvar_Get("vk_bitdepth", "0", 0);
 	vk_picmip = ri.Cvar_Get("vk_picmip", "0", 0);
 	vk_skymip = ri.Cvar_Get("vk_skymip", "0", 0);
-	vk_round_down = ri.Cvar_Get("vk_round_down", "1", 0);
 	vk_flashblend = ri.Cvar_Get("vk_flashblend", "0", 0);
 	vk_finish = ri.Cvar_Get("vk_finish", "0", CVAR_ARCHIVE);
 	r_clear = ri.Cvar_Get("r_clear", "0", CVAR_ARCHIVE);
@@ -1178,7 +1177,9 @@ R_Register( void )
 	vk_mip_nearfilter = ri.Cvar_Get("vk_mip_nearfilter", "0", CVAR_ARCHIVE);
 	vk_sampleshading = ri.Cvar_Get("vk_sampleshading", "1", CVAR_ARCHIVE);
 	vk_device_idx = ri.Cvar_Get("vk_device", "-1", CVAR_ARCHIVE);
-	vk_retexturing = ri.Cvar_Get("vk_retexturing", "0", CVAR_ARCHIVE);
+	vk_retexturing = ri.Cvar_Get("vk_retexturing", "1", CVAR_ARCHIVE);
+	/* don't bilerp characters and crosshairs */
+	vk_nolerp_list = ri.Cvar_Get("vk_nolerp_list", "pics/conchars.pcx pics/ch1.pcx pics/ch2.pcx pics/ch3.pcx", 0);
 
 	// clamp vk_msaa to accepted range so that video menu doesn't crash on us
 	if (vk_msaa->value < 0)

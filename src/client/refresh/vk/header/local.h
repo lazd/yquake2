@@ -68,9 +68,6 @@ typedef struct image_s
 	int		registration_sequence;		// 0 = free
 	struct msurface_s	*texturechain;	// for sort-by-texture world drawing
 	qvktexture_t vk_texture;			// Vulkan texture handle
-	float	sl, tl, sh, th;				// 0,0 - 1,1 unless part of the scrap
-	qboolean	scrap;
-
 } image_t;
 
 #define		MAX_VKTEXTURES	1024
@@ -144,7 +141,6 @@ extern	cvar_t	*vk_validation;
 extern	cvar_t	*vk_bitdepth;
 extern	cvar_t	*vk_picmip;
 extern	cvar_t	*vk_skymip;
-extern	cvar_t	*vk_round_down;
 extern	cvar_t	*vk_flashblend;
 extern	cvar_t	*vk_finish;
 extern	cvar_t	*vk_polyblend;
@@ -166,6 +162,7 @@ extern	cvar_t	*vk_aniso;
 extern	cvar_t	*vk_sampleshading;
 extern	cvar_t	*vk_device_idx;
 extern	cvar_t	*vk_retexturing;
+extern	cvar_t	*vk_nolerp_list;
 
 extern	cvar_t	*vid_fullscreen;
 extern	cvar_t	*vid_gamma;
@@ -229,8 +226,8 @@ struct image_s *RE_RegisterSkin (char *name);
 void LoadPCX (char *filename, byte **pic, byte **palette, int *width, int *height);
 image_t *Vk_LoadPic(char *name, byte *pic, int width, int realwidth,
 		    int height, int realheight, imagetype_t type,
-		    int bits, qvksampler_t *samplerType);
-image_t	*Vk_FindImage (char *name, imagetype_t type, qvksampler_t *samplerType);
+		    int bits);
+image_t	*Vk_FindImage (char *name, imagetype_t type);
 void	Vk_TextureMode( char *string );
 void	Vk_LmapTextureMode( char *string );
 void	Vk_ImageList_f (void);
